@@ -27,13 +27,17 @@ Remove an installed application using the Programs and Features display name
  http://www.markallenit.com/blog/
 
 ## EXAMPLE
- .\Remove-Application.ps1 -DisplayName 'Google Chrome'
+```powershell
+.\Remove-Application.ps1 -DisplayName 'Google Chrome'
+```
  Will find any entry in Programs and Features named 'Google Chrome and will uninstall it.
- The script log file will be at the default location with the default name:
+ The script log file will be at the default location with the default name:  
     'C:\Windows\Temp\Remove-Application Google Chrome.log'
 
 ## EXAMPLE
+```powershell
  .\Remove-Application.ps1 -DisplayName 'Google Chrome' -LogPath 'C:\Logs' -LogName 'Uninstall Google Chrome'
+ ```
  Will find any entry in Programs and Features named 'Google Chrome and will uninstall it.
- The script log file will be at the default location with the default name:
+ The script log file will be at the default location with the default name:  
     'C:\Logs\Uninstall Google Chrome.log'
