@@ -24,6 +24,7 @@ Remove an installed application using the Programs and Features display name
  Created: 16/08/2018
 
 ## LINK
+ https://medium.com/@markhenryallen/remove-a-windows-application-using-the-displayname-c641aadc684c
  http://www.markallenit.com/blog/
 
 ## EXAMPLE
