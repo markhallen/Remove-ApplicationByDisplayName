@@ -26,6 +26,12 @@ function Get-ArpPropertyByDisplayName {
     Get-ArpPropertyByDisplayName -DisplayName 'Google Chrome' -Property QuietUninstallString
     Will find any entry in Programs and Features named 'Google Chrome and will return the
     QuietUninstallString.
+
+    .EXAMPLE
+    Get-ArpPropertyByDisplayName -DisplayName '7-Zip * (x64 edition)'
+    Will find any entry in Programs and Features like '7-Zip * (x64 edition)' and will return the
+    UninstallString.
+    '*' is a wildcard that will be substituted by the version number in this example.
     #>
 
     param (
@@ -46,6 +52,6 @@ function Get-ArpPropertyByDisplayName {
     )
     Get-ChildItem -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall, HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall  |
     Get-ItemProperty |
-        Where-Object {$_.DisplayName -eq $DisplayName } |
+        Where-Object {$_.DisplayName -like $DisplayName } |
             Select-Object -ExpandProperty $Property
 }

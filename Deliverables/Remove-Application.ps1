@@ -35,6 +35,13 @@
  Will find any entry in Programs and Features named 'Google Chrome and will uninstall it.
  The script log file will be at the default location with the default name:
     'C:\Logs\Uninstall Google Chrome.log'
+
+.EXAMPLE
+.\Remove-Application.ps1 -DisplayName '7-Zip * (x64 edition)'
+ Will find any entry in Programs and Features like '7-Zip * (x64 edition)' and will uninstall it.
+ '*' is a wildcard that will be substituted by the version number in this example.
+ The script log file will be at the default location with the default name and the wild card swapped with hyphen:
+    'C:\Windows\Temp\Remove-Application 7-Zip - (x64 edition).log'
 #>
 
 [CmdletBinding( SupportsShouldProcess = $False, ConfirmImpact = "None", DefaultParameterSetName = "DisplayName" ) ]
@@ -97,6 +104,9 @@ begin
     if('' -ne $LogNamePrepend) { $LogFileName = $LogNamePrepend + ' ' + $LogFileName }
     if('' -ne $LogNameAppend) { $LogFileName = $LogFileName + ' ' + $LogNameAppend }
     if('' -ne $LogName) { $LogFileName = $LogName }
+
+    [System.IO.Path]::GetInvalidFileNameChars() | ForEach-Object {$text = $text.replace($_,'-')}
+
     if(!($LogFileName.ToLower().EndsWith('.log'))) { $LogFileName = $LogFileName + '.log' }
 
     $Seperator = ''

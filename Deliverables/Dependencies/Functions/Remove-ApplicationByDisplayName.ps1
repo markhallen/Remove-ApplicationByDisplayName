@@ -21,7 +21,12 @@ Function Remove-ApplicationByDisplayName
     .EXAMPLE
     Get-ApplicationByDisplayName -DisplayName 'Google Chrome'
     Will find any entry in Programs and Features named 'Google Chrome and will uninstall
-    it..
+    it.
+
+    .EXAMPLE
+    Get-ApplicationByDisplayName -DisplayName '7-Zip * (x64 edition)'
+    Will find any entry in Programs and Features like '7-Zip * (x64 edition)' and will uninstall it.
+    '*' is a wildcard that will be substituted by the version number in this example.
     #>
     param (
         [parameter(
@@ -35,9 +40,9 @@ Function Remove-ApplicationByDisplayName
 
     begin
     {
-        [String]$UninstallString = Get-ArpPropertyByDisplayName -DisplayName $DisplayName -Property QuietUninstallString
+        [String]$UninstallString = Get-ArpPropertyByDisplayName -DisplayName $DisplayName -Property QuietUninstallString | Select-Object -First 1
         if($null -eq $UninstallString) {
-            $UninstallString = Get-ArpPropertyByDisplayName -DisplayName $DisplayName
+            $UninstallString = Get-ArpPropertyByDisplayName -DisplayName $DisplayName | Select-Object -First 1
         }
         if($null -eq $UninstallString) {
             Write-Error -Message "Can't find an uninstall string." -ErrorAction Stop
